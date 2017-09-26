@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dos divs should be flipped</title>
+
+	<style type="text/css">
+	
+	.container {
+		width: 500px;
+		margin: auto;
+		font-family: sans;
+		background-color: #f1f1f1;
+		padding: 2px 2px 2px 2px;
+		border-radius: 4px;
+		height: 230px;
+	}
+
+	.blocked {
+		background: #e0e0e0;
+		color: black;
+		margin: 10px 10px 10px 10px;
+		padding: 5px  5px  5px  5px;
+		text-align: center;
+		border-radius: 4px;
+		/*display: none;*/
+	}
+
+	button {
+	    background-color: #008CBA;;
+	    border: none;
+	    color: white;
+	    padding: 15px 32px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+	    margin: 4px 2px;
+	    cursor: pointer;
+	    border-radius: 2px;
+	}
+
+	.btn {
+		margin:auto;
+		text-align: center;
+		margin-top: 5px;
+	}
+
+
+
+	</style>
+
+</head>
+<body>
+
+<div class="container">
+
+	<div id="div_0" class="blocked">
+		<p>Hey</p>
+	</div>
+
+	<div id="div_1" class="blocked">
+		<p>there</p>
+	</div>
+
+	<div id="div_2" class="blocked">
+		<p>sunshine</p>
+	</div>
+	
+</div>
+
+<div class="btn">
+	<button id="change-btn">
+		Swish!
+	</button>
+</div>
+
+
+<script type="text/javascript">
+
+	// everything should be the background of container
+	function reset() {
+		document.getElementById('div_0').style.background = "#f1f1f1";
+		document.getElementById('div_1').style.background = "#f1f1f1";
+		document.getElementById('div_2').style.background = "#f1f1f1";
+		document.getElementById('div_0').style.color = "#f1f1f1";
+		document.getElementById('div_1').style.color = "#f1f1f1";
+		document.getElementById('div_2').style.color = "#f1f1f1";
+	}	
+
+	let current = 0;
+
+	// binding the flipper function to the button click
+	let btn = document.getElementById("change-btn");
+	btn.onclick = function() {
+		reset();
+		if(current == 3) {
+			current = 0;
+			// console.log("reset");
+		}
+		let ch_id = "div_"+current; 
+		document.getElementById(ch_id).style.color = "black";
+		document.getElementById(ch_id).style.background = "#e0e0e0";
+		current++;
+		// console.log("h");
+	};
+
+</script>
+
+
+</body>
+</html>
