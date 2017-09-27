@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>String Twister</title>
+
+	<style type="text/css">
+		
+	.container {
+		font-family: sans;
+		color: #1F1F1F;
+		width: 35%;
+		min-width: 250px;
+		margin: auto;
+		padding-top: 30px;
+	}
+
+	button {
+	    background-color: #008CBA;
+	    border: none;
+	    color: white;
+	    padding: 15px 32px;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px;
+	    border-radius: 4px;
+	    cursor: pointer;
+	    margin-top: 25px;
+	}
+
+	#in-str {
+		padding: 5px;
+	    height:40px;
+	    font-size:14pt;
+	    width: 100%;
+	    border:solid 1px grey;
+	    -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+	    border-radius: 2px;
+	}
+
+	.do-it {
+		text-align: center;
+	}
+
+	.cboxes {
+		margin-top: 15px;
+	}
+
+	input[type="checkbox"] {
+		margin-top: 8px;
+	}
+
+	.out {
+		padding: 5px;
+	    height:60px;
+	    font-size:14pt;
+	    width: 100%;
+	    border:solid 1px #8d8d8d;
+	    -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+	    border-radius: 2px;
+	    margin-top: 10%;
+	}
+
+	.out p {
+		text-align: center;
+	}
+
+	.error {
+		color: #ED5245;
+	}
+
+	</style>
+
+</head>
+<body>
+
+<div class="container">
+	
+	<div class="in">
+		<input type="text" name="str" id="in-str" /> <br>
+
+		<div class="cboxes">
+			<input type="checkbox" id="reverse" value="false">reverse <br>
+			<input type="checkbox" id="uppercase" value="false">to uppercase <br> 
+			<input type="checkbox" id="numerise" value="false">do numeric conversion <br>
+		</div>
+
+		<div class="do-it">
+			<button id="do-it">Do it!</button>
+		</div>
+	</div>
+
+	<div class="out">
+		<p id="out-str">ಠ_ಠ</p>
+	</div>
+
+
+</div>
+
+</body>
+
+<script type="text/javascript">
+	
+var btn = document.getElementById("do-it");
+btn.onclick = function() {
+
+	var bool_rev = false;
+	var bool_upc = false;
+	var bool_num = false;
+
+	if(document.getElementById("reverse").checked) {
+		bool_rev = true;
+	}
+
+	if(document.getElementById("uppercase").checked) {
+		bool_upc = true;
+	}
+
+	if(document.getElementById("numerise").checked) {
+		bool_num = true;
+	}
+
+	var to_send = {
+		"rev" : bool_rev,
+		"upc" : bool_upc,
+		"num" : bool_num,
+		"str" : document.getElementById("in-str").value	
+	}
+
+	// console.log(to_send);
+
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	var serv_res = JSON.parse(xhttp.responseText);
+
+	    	if(serv_res.error == 0) {
+
+	    		if(document.getElementById("out-str").classList.contains("error")) {
+	    			document.getElementById("out-str").classList.remove("error");
+	    		}
+
+	    		document.getElementById("out-str").innerHTML = serv_res.msg;
+	    	} else {
+	    		document.getElementById("out-str").classList.add("error");
+	    		document.getElementById("out-str").innerHTML = serv_res.msg;
+	    	}
+	       	console.log();
+	       	
+	    }
+	};
+	xhttp.open("POST", "/do-stuff");
+	xhttp.setRequestHeader("Content-Type", "application/json");
+	xhttp.send(JSON.stringify(to_send));
+
+
+}
+
+</script>
+
+</html>
