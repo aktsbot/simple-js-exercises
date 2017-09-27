@@ -1,9 +1,9 @@
 # Getting started with APIs and the node way (̿▀̿ ̿Ĺ̯̿̿▀̿ ̿)̄
 
-####What does this do ?
+#### What does this do ?
 Runs an API which when triggered does 3 operations to a string passed to it.
 
-#####Example
+##### Example
 On sending the below to the API URL (`http://localhost:1337/do-stuff`) as a `POST` request,
 
 	{	
@@ -20,10 +20,10 @@ we'd recieve
 		"msg": "moor"
 	}
 
-####To run
+#### To run
 
 	$ npm install 
 	$ npm start
 	
-####TODO
+#### TODO
 Document the thing, you lazy ass.
